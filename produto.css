@@ -1,4 +1,4 @@
-/* Variáveis de Cores (Extraídas do seu Tailwind Config) */
+/* Variáveis de Cores*/
 :root {
     --background: #fbf9f8;
     --on-surface: #1b1c1c;
@@ -103,6 +103,7 @@ main {
     padding-top: 6rem;
     padding-bottom: 3rem;
 }
+
 
 .breadcrumbs {
     padding: 0 2rem;
