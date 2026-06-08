@@ -33,10 +33,10 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, .logo {
-    font-family: 'Noto Serif', serif;
-}
 
+h1, h2, h3, .logo {
+    font-family: 'Noto Serif', serif; /* Ou 'Manrope', sans-serif */
+}
 a {
     text-decoration: none;
     color: inherit;

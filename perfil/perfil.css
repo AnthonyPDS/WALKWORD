@@ -21,12 +21,12 @@
 body {
     background-color: var(--background);
     color: var(--on-surface);
-    font-family: 'Manrope', sans-serif;
+    font-family: url(https://fonts.googleapis.com/css2?family%3DMontserrat%3Awght%40300%3B400%3B500%3B600%26display%3Dswap%22);
     line-height: 1.5;
 }
 
 h1, h2, h3, .logo {
-    font-family: 'Noto Serif', serif;
+    font-family: url(https://fonts.googleapis.com/css2?family%3DMontserrat%3Awght%40300%3B400%3B500%3B600%26display%3Dswap%22);
 }
 
 a {
