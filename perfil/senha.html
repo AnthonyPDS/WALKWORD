@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>WalkWord - Meus Favoritos</title>
+    <title>WalkWord - Alterar Senha</title>
     
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;500;700&display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" />
@@ -30,7 +30,7 @@
         <div class="breadcrumbs">
             <a href="#">Home</a>
             <span class="material-symbols-outlined icon-small">chevron_right</span>
-            <span class="current-page">Meus Favoritos</span>
+            <span class="current-page">Alterar Senha</span>
         </div>
 
         <section class="account-container">
@@ -53,11 +53,11 @@
                         <span class="material-symbols-outlined">location_on</span>
                         Meus Endereços
                     </a>
-                    <a href="preferencias.html" class="active">
+                    <a href="favoritos.html">
                         <span class="material-symbols-outlined">favorite</span>
                         Meus favoritos
                     </a>
-                    <a href="senha.html">
+                    <a href="alterar-senha.html" class="active">
                         <span class="material-symbols-outlined">key</span>
                         Alterar Senha
                     </a>
@@ -65,11 +65,36 @@
             </aside>
 
             <div class="account-content">
-                <h2>Meus Favoritos</h2>
-                <p class="section-description">Sua curadoria pessoal. Aqui estão os produtos que você marcou com um coração.</p>
+                <h2>Alterar Senha</h2>
+                <p class="section-description">Mantenha sua conta segura. A nova senha deve conter no mínimo 6 caracteres.</p>
                 
-                <div class="favorites-grid" id="favorites-container">
-                </div>
+                <form class="password-form">
+                    <div class="form-grid">
+                        
+                        <div class="input-group">
+                            <label for="current-password">Senha atual</label>
+                            <span class="material-symbols-outlined input-icon">key</span>
+                            <input type="password" id="current-password" placeholder="••••••••">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="new-password">Nova senha</label>
+                            <span class="material-symbols-outlined input-icon">lock</span>
+                            <input type="password" id="new-password" placeholder="••••••••">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="confirm-password">Confirmar nova senha</label>
+                            <span class="material-symbols-outlined input-icon">lock_reset</span>
+                            <input type="password" id="confirm-password" placeholder="••••••••">
+                        </div>
+
+                    </div>
+
+                    <div class="action-buttons">
+                        <button type="submit" class="btn-primary">Salvar Alterações</button>
+                    </div>
+                </form>
             </div>
         </section>
     </main>
@@ -85,6 +110,7 @@
             <a href="#">Ajuda</a>
         </div>
     </footer>
-<script src="favoritos.js"></script>
+
+    <script src="alterar-senha.js"></script>
 </body>
 </html>
