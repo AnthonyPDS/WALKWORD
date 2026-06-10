@@ -6,12 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const userEmailElement = document.getElementById('userEmail');
     const usuarioLogado = localStorage.getItem('usuarioLogado');
 
-    if (usuarioLogado) {
-        userEmailElement.textContent = usuarioLogado;
-    } else {
-        userEmailElement.textContent = "Visitante";
-        // Opcional: Redirecionar para login se não estiver logado
-        // window.location.href = 'index.html';
+    if (userEmailElement) {
+        if (usuarioLogado) {
+            userEmailElement.textContent = usuarioLogado;
+        } else {
+            userEmailElement.textContent = "visitante@walkword.com"; // Padrão caso não haja login
+        }
     }
 
     /* ==========================================================================
@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const subtotalElement = document.getElementById('checkout-subtotal');
     const totalElement = document.getElementById('checkout-total');
     
-    // Puxa a mesma lista do JS do carrinho que você enviou
     const listaCarrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     
     if (listaCarrinho.length === 0) {
@@ -30,50 +29,48 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     let subtotalGeral = 0;
-    
-    // Refaz o cálculo baseado na quantidade e preço
     listaCarrinho.forEach((produto) => {
         subtotalGeral += (produto.preco * produto.quantidade);
     });
 
-    // Atualiza os valores na tela de checkout
     if (subtotalElement) subtotalElement.innerText = `$${subtotalGeral.toFixed(2)}`;
     if (totalElement) totalElement.innerText = `$${subtotalGeral.toFixed(2)}`;
 
 
     /* ==========================================================================
-       3. VALIDAÇÃO DO FORMULÁRIO E TRANSIÇÃO DE TELA
+       3. VALIDAÇÃO DO FORMULÁRIO, SALVAMENTO E REDIRECIONAMENTO
        ========================================================================== */
     const checkoutForm = document.getElementById('checkoutForm');
     
     if (checkoutForm) {
         checkoutForm.addEventListener('submit', (e) => {
-            e.preventDefault(); // Impede o reload
+            e.preventDefault(); // Impede o reload da página
             
+            // Captura os valores digitados
             const cep = document.getElementById('cep').value;
             const endereco = document.getElementById('endereco').value;
+            const numero = document.getElementById('numero').value;
+            const complemento = document.getElementById('complemento').value;
+            const bairro = document.getElementById('bairro').value;
+            const cidade = document.getElementById('cidade').value;
+            const estado = document.getElementById('estado').value;
             
-            if (!cep || !endereco) {
-                alert("Por favor, preencha as informações obrigatórias de endereço.");
-                return;
-            }
-
-            // Simula o salvamento do endereço no LocalStorage
+            // Cria o objeto estruturado com o endereço completo
             const enderecoEntrega = {
                 cep: cep,
                 rua: endereco,
-                numero: document.getElementById('numero').value,
-                bairro: document.getElementById('bairro').value,
-                cidade: document.getElementById('cidade').value,
-                estado: document.getElementById('estado').value
+                numero: numero,
+                complemento: complemento,
+                bairro: bairro,
+                cidade: cidade,
+                estado: estado
             };
             
+            // Salva o endereço firmemente no localStorage
             localStorage.setItem('enderecoEntrega', JSON.stringify(enderecoEntrega));
             
-            alert("Endereço cadastrado! Redirecionando para a etapa de pagamento.");
-            
-            // Simulação de redirecionamento para a próxima tela
-            // window.location.href = 'pagamento.html';
+            // Avança para a página de pagamento
+            window.location.href = 'pagamento.html';
         });
     }
 });

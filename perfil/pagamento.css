@@ -1,0 +1,131 @@
+/* ==========================================================================
+   ESTILOS ESPECÍFICOS: PAGAMENTO (INSPIRAÇÃO RENNER + ESTILO WALKWORD)
+   ========================================================================== */
+
+/* Navbar e Layout Base (Reaproveitados do Checkout) */
+.checkout-navbar { justify-content: space-between; }
+.secure-badge { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; font-weight: 700; color: var(--primary); }
+.checkout-main { padding-top: 6rem; max-width: 1200px; margin: 0 auto; padding-bottom: 4rem; }
+
+.checkout-steps { display: flex; width: 100%; margin-bottom: 3rem; background-color: var(--surface-container-high); }
+.step { flex: 1; text-align: center; padding: 1rem; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 0.5rem; color: var(--on-surface-variant); }
+.step.completed { background-color: var(--surface-container-low); color: var(--primary); }
+.step.active { background-color: var(--on-surface); color: var(--on-primary); }
+
+.checkout-container { display: grid; grid-template-columns: 1fr; gap: 2rem; padding: 0 1.5rem; }
+
+@media (min-width: 1024px) {
+    .checkout-container {
+        /* Grid em 3 colunas, idêntico à imagem de referência */
+        grid-template-columns: 200px 1fr 300px;
+        gap: 2.5rem;
+    }
+}
+
+/* Coluna 1: Informações (Usuário e Endereço) */
+.info-block {
+    margin-bottom: 2rem;
+}
+.info-text { font-size: 0.85rem; color: var(--primary); font-weight: 700; margin-bottom: 0.25rem; word-break: break-all; }
+.info-subtext { font-size: 0.8rem; color: var(--on-surface-variant); margin-bottom: 0.5rem; }
+.address-details { font-size: 0.8rem; color: var(--on-surface-variant); line-height: 1.4; margin-bottom: 0.75rem; }
+.link-alterar { font-size: 0.8rem; font-weight: 700; color: var(--on-surface); text-decoration: underline; text-underline-offset: 4px; }
+
+/* Coluna 2: Container Central de Pagamento */
+.payment-wrapper {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--outline-variant);
+    min-height: 450px;
+    background-color: #fff;
+}
+
+@media (min-width: 768px) {
+    .payment-wrapper { flex-direction: row; }
+}
+
+/* Sidebar interna das abas de pagamento */
+.payment-sidebar {
+    width: 100%;
+    background-color: var(--surface-container-low);
+    border-bottom: 1px solid var(--outline-variant);
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 768px) {
+    .payment-sidebar {
+        width: 220px;
+        border-bottom: none;
+        border-right: 1px solid var(--outline-variant);
+    }
+}
+
+.payment-tab {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    font-size: 0.9rem;
+    color: var(--on-surface-variant);
+    text-align: left;
+    border-left: 4px solid transparent; /* Indicador de ativo */
+}
+
+.payment-tab:hover { background-color: rgba(0,0,0,0.02); }
+
+.payment-tab.active {
+    background-color: #fff;
+    border-left-color: var(--primary);
+    color: var(--on-surface);
+    font-weight: 700;
+}
+
+/* Conteúdo da Aba Ativa */
+.payment-content {
+    flex: 1;
+    padding: 2rem;
+}
+
+.payment-panel { display: none; } /* Oculta todas as abas por padrão */
+.payment-panel.active { display: block; animation: fadeIn 0.3s ease; } /* Exibe a ativa */
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.panel-title { font-size: 1rem; font-family: 'Manrope', sans-serif; letter-spacing: 0.1em; margin-bottom: 1.5rem; text-transform: uppercase; color: var(--charcoal); }
+
+/* Inputs do Cartão */
+#form-credito { display: flex; flex-direction: column; gap: 1.5rem; }
+.input-group { border-bottom: 1px solid var(--on-surface); padding-bottom: 0.25rem; }
+.input-group label { font-size: 0.7rem; font-weight: 500; color: var(--on-surface-variant); display: block; margin-bottom: 0.25rem; }
+.input-group input { width: 100%; border: none; background: transparent; font-size: 1rem; font-family: inherit; color: var(--on-surface); padding-left: 0; outline: none; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+.custom-select {
+    width: 100%;
+    border: none;
+    background: transparent;
+    font-size: 0.9rem;
+    color: var(--on-surface);
+    outline: none;
+    cursor: pointer;
+    padding: 0.25rem 0;
+}
+
+/* Container do PIX */
+.pix-info { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background-color: var(--surface-container-low); padding: 3rem 2rem; border-radius: 8px; border: 1px dashed var(--outline-variant); }
+.pix-icon { font-size: 3rem; color: var(--primary); margin-bottom: 1rem; }
+.pix-info p { font-size: 0.9rem; color: var(--on-surface-variant); line-height: 1.5; }
+
+/* Coluna 3: Resumo (Reaproveitado) */
+.cart-summary { background-color: var(--surface-container-low); padding: 2rem; }
+.cart-summary h3 { font-size: 0.9rem; letter-spacing: 0.05em; margin-bottom: 1.5rem; }
+.summary-row { display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 0.9rem; }
+.freight-row { padding-bottom: 1rem; border-bottom: 1px solid var(--outline-variant); }
+.checkout-total-row { background-color: var(--surface-container-high); margin: 1rem -2rem -2rem -2rem; padding: 1.5rem 2rem; align-items: center; font-size: 1.2rem; font-weight: bold;}
+.info-box { margin-top: 1rem; border: 1px solid var(--outline-variant); padding: 1rem; font-size: 0.75rem; color: var(--on-surface-variant); display: flex; align-items: flex-start; gap: 0.5rem; position: relative; }
+.info-highlight { font-weight: 700; color: var(--error); }
+.info-icon { position: absolute; right: 1rem; top: 1rem; font-size: 1rem; color: var(--outline-variant); }
