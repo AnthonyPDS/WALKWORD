@@ -74,6 +74,18 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Simulação de redirecionamento para a próxima tela
             // window.location.href = 'pagamento.html';
+            
+            
+            
+            //NAVEGA DA TELA DE COMPRA PARA A TELA DE PAGAMENTO
+            const botaoPagamento =
+document.querySelector(".btn-primary");
+
+botaoPagamento.addEventListener("click", () => {
+
+    window.location.href = "pagamento.html";
+
+});
         });
     }
 });
