@@ -1,0 +1,263 @@
+/* Variáveis de Cores inspiradas nas imagens */
+:root {
+    --bg-color: #F9F9F6;
+    --text-main: #333333;
+    --text-light: #777777;
+    --brand-green: #546652; /* Cor do botão Finalizar Compra */
+    --brand-green-hover: #435241;
+    --border-color: #E5E5E5;
+    --summary-bg: #F4F4F2;
+    --summary-total-bg: #EAEAEA;
+    --dark-bar: #1F1F1F;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.5;
+}
+
+/* Header */
+.header {
+    background-color: var(--bg-color);
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border-color);
+    
+    /* Novas linhas para fazer o topo descer junto com o scroll: */
+    position: -webkit-sticky; /* Suporte para navegadores Safari antigos */
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Garante que o topo fique sempre por cima do conteúdo ao rolar */
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--brand-green);
+}
+
+.secure-site {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+/* Barra de Progresso */
+.progress-bar {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #fff;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.step {
+    flex: 1;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--text-light);
+}
+
+.step.dark {
+    background-color: var(--dark-bar);
+    color: #fff;
+}
+
+/* Container Principal */
+.main-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+/* Seção de Sucesso (Esquerda) */
+.success-section {
+    flex: 2;
+    background: #fff;
+    padding: 40px;
+    border: 1px solid var(--border-color);
+}
+
+.success-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.check-icon {
+    margin-bottom: 20px;
+}
+
+.success-header h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: var(--brand-green);
+}
+
+.success-header p {
+    color: var(--text-light);
+}
+
+.order-info-box {
+    display: flex;
+    gap: 20px;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 25px 0;
+    margin-bottom: 25px;
+}
+
+.info-group {
+    flex: 1;
+}
+
+.info-group h3 {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 8px;
+}
+
+.info-group p {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.highlight {
+    color: var(--brand-green);
+    font-size: 18px !important;
+}
+
+.sub-text {
+    font-size: 12px;
+    color: var(--text-light);
+    font-weight: 400;
+}
+
+.delivery-address h3 {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.delivery-address p {
+    font-size: 14px;
+    color: var(--text-light);
+    margin-bottom: 4px;
+}
+
+.btn-primary {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    background-color: var(--brand-green);
+    color: #fff;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: background 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--brand-green-hover);
+}
+
+/* Resumo da Compra (Direita) */
+.summary-section {
+    flex: 1;
+    min-width: 320px;
+    position: -webkit-sticky; /* Suporte para navegadores Safari antigos */
+    position: sticky;
+    top: 20px;
+}
+
+.summary-box {
+    background-color: var(--summary-bg);
+    padding: 30px;
+    border: 1px solid var(--border-color);
+}
+
+.summary-title {
+    font-size: 14px;
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 25px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: var(--text-light);
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--summary-total-bg);
+    margin: 20px -30px -30px -30px;
+    padding: 25px 30px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.summary-total span:first-child {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+}
+
+.easy-exchange {
+    margin-top: 15px;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    font-size: 12px;
+    color: var(--text-light);
+    background: #fff;
+}
+
+.red-text {
+    color: #c92a2a;
+    font-weight: 600;
+}
+
+/* Responsividade Básica */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+    }
+    .summary-section {
+        width: 100%;
+    }
+}

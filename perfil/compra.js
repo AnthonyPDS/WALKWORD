@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', () => {
     
     /* ==========================================================================
@@ -10,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (usuarioLogado) {
             userEmailElement.textContent = usuarioLogado;
         } else {
-            userEmailElement.textContent = "visitante@walkword.com"; // Padrão caso não haja login
+            userEmailElement.textContent = "visitante@walkword.com";
         }
     }
 
@@ -36,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (subtotalElement) subtotalElement.innerText = `$${subtotalGeral.toFixed(2)}`;
     if (totalElement) totalElement.innerText = `$${subtotalGeral.toFixed(2)}`;
 
-
     /* ==========================================================================
        3. VALIDAÇÃO DO FORMULÁRIO, SALVAMENTO E REDIRECIONAMENTO
        ========================================================================== */
@@ -44,8 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (checkoutForm) {
         checkoutForm.addEventListener('submit', (e) => {
-            e.preventDefault(); // Impede o reload da página
-            
+            e.preventDefault();
+
             // Captura os valores digitados
             const cep = document.getElementById('cep').value;
             const endereco = document.getElementById('endereco').value;
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const bairro = document.getElementById('bairro').value;
             const cidade = document.getElementById('cidade').value;
             const estado = document.getElementById('estado').value;
-            
+
             // Cria o objeto estruturado com o endereço completo
             const enderecoEntrega = {
                 cep: cep,
@@ -65,11 +65,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 cidade: cidade,
                 estado: estado
             };
-            
-            // Salva o endereço firmemente no localStorage
+
+            // Salva o endereço no localStorage
             localStorage.setItem('enderecoEntrega', JSON.stringify(enderecoEntrega));
-            
-            // Avança para a página de pagamento
+
+            alert("Endereço cadastrado! Redirecionando para a etapa de pagamento.");
+
+            // Redireciona para a página de pagamento
             window.location.href = 'pagamento.html';
         });
     }
