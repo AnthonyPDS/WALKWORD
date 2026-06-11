@@ -6,13 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const userEmailElement = document.getElementById('userEmail');
     const addressDetailsElement = document.getElementById('addressDetails');
     
-    // Puxa o e-mail do login ou define o padrão
     const usuarioLogado = localStorage.getItem('usuarioLogado');
     if (userEmailElement) {
         userEmailElement.textContent = usuarioLogado ? usuarioLogado : "visitante@walkword.com";
     }
 
-    // Puxa o endereço salvo na tela de formulário
     const enderecoSalvo = localStorage.getItem('enderecoEntrega');
     if (enderecoSalvo && addressDetailsElement) {
         const endereco = JSON.parse(enderecoSalvo);
@@ -48,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (freteElement) freteElement.innerText = `$${valorFrete.toFixed(2)}`;
     if (totalElement) totalElement.innerText = `$${totalGeral.toFixed(2)}`;
 
-    // Atualiza os simuladores do select de parcelas
     document.querySelectorAll('.parcela-total').forEach(el => el.innerText = totalGeral.toFixed(2));
     document.querySelectorAll('.parcela-meia').forEach(el => el.innerText = (totalGeral / 2).toFixed(2));
 
@@ -71,16 +68,47 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ==========================================================================
-       4. LÓGICA DE FINALIZAR O PEDIDO (REDIRECIONANDO PARA TELA DE SUCESSO)
+       4. MÁSCARAS E RESTRIÇÕES EM TEMPO REAL (MÁGICA DOS INPUTS)
+       ========================================================================== */
+    const inputCartao = document.getElementById('numero-cartao');
+    const inputValidade = document.getElementById('validade-cartao');
+    const inputCvv = document.getElementById('cvv-cartao');
+
+    // Máscara do Número do Cartão (0000 0000 0000 0000)
+    if (inputCartao) {
+        inputCartao.addEventListener('input', (e) => {
+            let valor = e.target.value.replace(/\D/g, '');
+            valor = valor.replace(/(\d{4})(?=\d)/g, '$1 ');
+            e.target.value = valor;
+        });
+    }
+
+    // Máscara da Validade (MM/AA)
+    if (inputValidade) {
+        inputValidade.addEventListener('input', (e) => {
+            let valor = e.target.value.replace(/\D/g, ''); // Remove letras
+            
+            // Se digitou mais de 2 números, coloca a barra de separação
+            if (valor.length > 2) {
+                valor = valor.substring(0, 2) + '/' + valor.substring(2, 4);
+            }
+            e.target.value = valor;
+        });
+    }
+
+    // Máscara do CVV (Apenas 3 números)
+    if (inputCvv) {
+        inputCvv.addEventListener('input', (e) => {
+            // Remove tudo que não for número e limita a 3 caracteres
+            e.target.value = e.target.value.replace(/\D/g, '').substring(0, 3);
+        });
+    }
+
+    /* ==========================================================================
+       5. LÓGICA DE FINALIZAR O PEDIDO (VALIDAÇÕES DOS CAMPOS)
        ========================================================================== */
     function concluirPedido(metodoEscolhido) {
-        window.location.href = 'pagsucesso.html';
         localStorage.setItem('metodoPagamento', metodoEscolhido);
-        
-        alert('🎉 Processando seu pedido...');
-        
-        // 2. MUDA PARA A TELA DE SUCESSO
-        // Atenção: Verifique se o seu arquivo HTML se chama 'sucesso.html' ou outro nome!
         window.location.href = 'sucesso.html'; 
     }
 
@@ -89,7 +117,46 @@ document.addEventListener('DOMContentLoaded', () => {
     if (formCredito) {
         formCredito.addEventListener('submit', (e) => {
             e.preventDefault(); 
-            concluirPedido('cartao'); // Salva como 'cartao'
+
+            // 1. Validação do Número do Cartão (16 dígitos)
+            if (inputCartao) {
+                const apenasNumeros = inputCartao.value.replace(/\s/g, '');
+                if (apenasNumeros.length < 16) {
+                    alert('Por favor, digite um número de cartão válido (16 dígitos).');
+                    inputCartao.focus();
+                    return; 
+                }
+            }
+
+            // 2. Validação da Validade (Precisa ter o formato MM/AA completo - 4 números)
+            if (inputValidade) {
+                const apenasNumerosValidade = inputValidade.value.replace(/\D/g, '');
+                if (apenasNumerosValidade.length < 4) {
+                    alert('Por favor, digite a validade completa (MM/AA).');
+                    inputValidade.focus();
+                    return;
+                }
+                
+                // Validação extra: impede meses maiores que 12
+                const mes = parseInt(apenasNumerosValidade.substring(0, 2), 10);
+                if (mes < 1 || mes > 12) {
+                    alert('Mês inválido! Digite um mês entre 01 e 12.');
+                    inputValidade.focus();
+                    return;
+                }
+            }
+
+            // 3. Validação do CVV (Precisa ter exatamente 3 dígitos)
+            if (inputCvv) {
+                if (inputCvv.value.length < 3) {
+                    alert('Por favor, digite um CVV válido (3 dígitos).');
+                    inputCvv.focus();
+                    return;
+                }
+            }
+
+            // Se passou por todas as três travas de segurança:
+            concluirPedido('cartao'); 
         });
     }
 
@@ -97,9 +164,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnPix = document.getElementById('btn-finalizar-pix');
     if (btnPix) {
         btnPix.addEventListener('click', (e) => {
-            e.preventDefault(); // Impede o botão de recarregar a tela sozinho
-            concluirPedido('pix'); // Salva como 'pix' e redireciona
+            e.preventDefault(); 
+            concluirPedido('pix'); 
         });
     }
-
 });
