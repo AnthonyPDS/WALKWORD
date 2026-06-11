@@ -5,76 +5,90 @@ document.addEventListener('DOMContentLoaded', () => {
        ========================================================================== */
     const orderNumberElement = document.getElementById('order-number');
     if (orderNumberElement) {
-        // Gera um número aleatório elegante para o pedido
-        const codigoAleatorio = Math.floor(10000 + Math.random() * 900000);
+        const codigoAleatorio = Math.floor(100000 + Math.random() * 900000);
         orderNumberElement.textContent = `#WW-${codigoAleatorio}`;
     }
 
     /* ==========================================================================
-       2. EXIBIR E-MAIL DO USUÁRIO LOGADO OU VISITANTE
+       2. CALCULAR DATA DE ENTREGA AUTOMÁTICA (+6 dias úteis)
        ========================================================================== */
-    const customerEmailElement = document.getElementById('customer-email');
-    const usuarioLogado = localStorage.getItem('usuarioLogado');
-    
-    if (customerEmailElement) {
-        customerEmailElement.textContent = usuarioLogado ? usuarioLogado : "visitante@walkword.com";
+    const deliveryDateElement = document.getElementById('delivery-date');
+    if (deliveryDateElement) {
+        const hoje = new Date();
+        hoje.setDate(hoje.getDate() + 8); // Soma dias corridos aproximando dias úteis
+        const opcoes = { day: 'numeric', month: 'long' };
+        deliveryDateElement.textContent = hoje.toLocaleDateString('pt-BR', opcoes);
     }
 
     /* ==========================================================================
-       3. RESGATAR E MOSTRAR O ENDEREÇO SALVO NO LOCALSTORAGE
+       3. CAPTURAR E INJETAR ENDEREÇO DO LOCALSTORAGE
        ========================================================================== */
-    const deliveryAddressElement = document.getElementById('delivery-address');
+    const addressContainer = document.getElementById('dynamic-address-content');
     const enderecoSalvo = localStorage.getItem('enderecoEntrega');
 
-    if (deliveryAddressElement) {
+    if (addressContainer) {
         if (enderecoSalvo) {
             const endereco = JSON.parse(enderecoSalvo);
-            
-            // Renderiza estruturado na tela
-            deliveryAddressElement.innerHTML = `
-                ${endereco.rua}, ${endereco.numero} ${endereco.complemento ? ' - ' + endereco.complemento : ''}<br>
-                Bairro ${endereco.bairro} — CEP: ${endereco.cep}<br>
-                ${endereco.cidade} - ${endereco.estado}
+            addressContainer.innerHTML = `
+                <p>${endereco.rua}, ${endereco.numero} ${endereco.complemento ? ' - ' + endereco.complemento : ''}</p>
+                <p>Bairro ${endereco.bairro}</p>
+                <p>CEP: ${endereco.cep}</p>
+                <p>${endereco.cidade} - ${endereco.estado}</p>
             `;
         } else {
-            deliveryAddressElement.textContent = "Informações de entrega gerenciadas via retirada física ou formato digital.";
+            addressContainer.innerHTML = `<p>Retirada agendada ou Formato de entrega digital WalkWord.</p>`;
         }
     }
 
     /* ==========================================================================
-       4. HIGIENE DO CARRINHO (LIMPEZA PÓS-COMPRA)
+       4. CALCULAR DINAMICAMENTE O RESUMO DO CARRINHO LATERAL
        ========================================================================== */
-    // Remove os produtos adquiridos para zerar o carrinho do usuário
-    localStorage.removeItem('carrinho');
+    const subtotalElement = document.getElementById('summary-subtotal');
+    const totalElement = document.getElementById('summary-total-price');
+    const freteElement = document.getElementById('summary-frete');
+    
+    const listaCarrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    let subtotalGeral = 0;
+
+    listaCarrinho.forEach((produto) => {
+        subtotalGeral += (produto.preco * produto.quantidade);
+    });
+
+    // Se o subtotal for 0 (teste direto na página), aplica valor mockado para não quebrar a estética
+    if (subtotalGeral === 0) {
+        subtotalGeral = 15.00;
+    }
+
+    const valorFrete = 0.00; // Frete Grátis conforme layout enviado
+    const totalGeral = subtotalGeral + valorFrete;
+
+    if (subtotalElement) subtotalElement.innerText = `$${subtotalGeral.toFixed(2)}`;
+    if (freteElement) freteElement.innerText = valorFrete === 0 ? "Grátis" : `$${valorFrete.toFixed(2)}`;
+    if (totalElement) totalElement.innerText = `$${totalGeral.toFixed(2)}`;
 
     /* ==========================================================================
-       5. VERIFICAÇÃO DE MÉTODO DE PAGAMENTO (PIX DETECT)
+       5. VERIFICAÇÃO DE PIX E INPUT DE CÓPIA
        ========================================================================== */
     const metodo = localStorage.getItem('metodoPagamento');
     const pixArea = document.getElementById('pix-payment-area');
 
     if (metodo === 'pix' && pixArea) {
-        // Mostra a área do PIX montada no HTML
-        pixArea.style.display = 'block';
+        pixArea.style.display = 'block'; // Ativa a janela do PIX na tela
         
-        // Configura o botão de copiar o código PIX
         const btnCopiar = document.getElementById('btnCopiarPix');
         const inputPix = document.getElementById('pixCodeInput');
         
         if (btnCopiar && inputPix) {
             btnCopiar.addEventListener('click', () => {
                 inputPix.select();
-                inputPix.setSelectionRange(0, 99999); // Suporte para mobile
-                
+                inputPix.setSelectionRange(0, 99999);
                 navigator.clipboard.writeText(inputPix.value);
                 
-                // Feedback visual de sucesso no botão
                 btnCopiar.innerText = "CÓDIGO COPIADO!";
-                btnCopiar.style.backgroundColor = "#1e4620";
+                btnCopiar.style.backgroundColor = "#546652";
                 btnCopiar.style.color = "#ffffff";
-                btnCopiar.style.borderColor = "#1e4620";
+                btnCopiar.style.borderColor = "#546652";
                 
-                // Reseta o botão após 3 segundos
                 setTimeout(() => {
                     btnCopiar.innerText = "COPIAR CÓDIGO PIX";
                     btnCopiar.style.backgroundColor = "transparent";
@@ -85,6 +99,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Limpa o método de pagamento para não interferir em compras futuras
+    /* ==========================================================================
+       6. LIMPEZA SEGURA DO CARRINHO (PÓS-LEITURA)
+       ========================================================================== */
+    localStorage.removeItem('carrinho');
     localStorage.removeItem('metodoPagamento');
 });

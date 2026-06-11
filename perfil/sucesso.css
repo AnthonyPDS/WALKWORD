@@ -1,241 +1,286 @@
 /* ==========================================================================
-   ESTILOS ESPECÍFICOS: COMPRA EFETUADA (WALKWORD)
+   RESET E CONFIGURAÇÕES GERAIS (WALKWORD)
    ========================================================================== */
-
-.success-main {
-    padding-top: 7rem;
-    padding-bottom: 5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 85vh;
-    background-color: var(--surface-container-lowest, #fafafa);
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.success-card {
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #fcfcfc;
+    color: #111111;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+.header {
     background-color: #ffffff;
-    max-width: 580px;
-    width: 100%;
-    padding: 3.5rem 2.5rem;
-    text-align: center;
-    border: 1px solid var(--outline-variant, #e0e0e0);
+    border-bottom: 1px solid #e5e5e5;
+    padding: 1.25rem 2rem;
 }
 
-.success-icon-wrapper {
-    margin-bottom: 1.5rem;
-}
-
-.success-icon {
-    font-size: 3.5rem;
-    color: var(--primary, #111111);
-    font-variation-settings: 'FILL' 1; /* Preenche o ícone */
-}
-
-.success-title {
-    font-family: 'Manrope', sans-serif;
-    font-size: 1.15rem;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    color: var(--on-surface, #111111);
-    margin-bottom: 1rem;
-    line-height: 1.4;
-}
-
-.success-subtitle {
-    font-size: 0.85rem;
-    color: var(--on-surface-variant, #666666);
-    line-height: 1.6;
-    margin-bottom: 2.5rem;
-    padding: 0 1rem;
-}
-
-/* Painel de Informações do Pedido */
-.order-info-box {
-    background-color: var(--surface-container-low, #f5f5f5);
-    padding: 1.25rem 1.5rem;
-    margin-bottom: 1.5rem;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
-    border-bottom: 1px solid var(--outline-variant, #e0e0e0);
-}
-
-.info-row-detail {
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 0.85rem;
 }
 
-.info-label {
-    color: var(--on-surface-variant, #666666);
-}
-
-.info-value {
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
     font-weight: 700;
-    color: var(--on-surface, #111111);
+    letter-spacing: -0.02em;
 }
 
-.status-badge {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: #1e4620;
-    background-color: #edf7ed;
-    padding: 0.2rem 0.6rem;
-    border-radius: 4px;
-}
-
-/* Painel do Endereço Resgatado */
-.delivery-summary-box {
-    text-align: left;
-    padding: 0 1.5rem;
-    margin-bottom: 2.5rem;
-}
-
-.delivery-title {
-    font-family: 'Manrope', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-    color: var(--on-surface, #111111);
-}
-
-.delivery-text {
-    font-size: 0.85rem;
-    color: var(--on-surface-variant, #666666);
-    line-height: 1.5;
-}
-
-.success-footer-text {
-    font-size: 0.8rem;
-    color: var(--on-surface-variant, #888888);
-    line-height: 1.5;
-    margin-bottom: 2.5rem;
-    border-top: 1px dashed var(--outline-variant, #e0e0e0);
-    padding-top: 1.5rem;
-}
-
-/* Botão Customizado de Sucesso */
-.btn-primary-success {
-    display: inline-block;
-    width: 100%;
-    background-color: var(--primary, #111111);
-    color: #ffffff;
-    padding: 1rem 2rem;
-    font-family: 'Manrope', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-decoration: none;
-    transition: background-color 0.2s ease;
-}
-
-.btn-primary-success:hover {
-    background-color: #333333;
-}
-/* ==========================================================================
-   BLOCO DO PIX NA TELA DE SUCESSO
-   ========================================================================== */
-
-.pix-success-box {
-    margin-top: 1.5rem;
-    animation: fadeIn 0.4s ease-in-out;
-}
-
-.pix-divider {
-    border-top: 1px solid var(--outline-variant, #e0e0e0);
-    margin-bottom: 1.5rem;
-}
-
-.pix-zone-title {
-    font-family: 'Manrope', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    color: #111111;
-    margin-bottom: 0.5rem;
-}
-
-.pix-zone-text {
-    font-size: 0.8rem;
-    color: #666666;
-    margin-bottom: 1.5rem;
-}
-
-.qr-code-wrapper {
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    width: 160px;
-    height: 160px;
-    margin: 0 auto 1.5rem auto;
+.secure-site {
     display: flex;
-    justify-content: center;
     align-items: center;
-}
-
-.qr-placeholder-icon {
-    font-size: 8rem;
-    color: #111111;
-}
-
-.pix-copy-paste-container {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    max-width: 400px;
-    margin: 0 auto 1rem auto;
-}
-
-#pixCodeInput {
-    background-color: #f5f5f5;
-    border: 1px solid #e0e0e0;
-    padding: 0.75rem;
-    font-family: monospace;
+    gap: 0.35rem;
     font-size: 0.75rem;
-    color: #555555;
-    text-align: center;
-    border-radius: 0;
-}
-
-.btn-secondary-success {
-    background-color: transparent;
-    border: 1px solid #111111;
-    color: #111111;
-    padding: 0.75rem;
-    font-family: 'Manrope', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 700;
+    text-transform: uppercase;
     letter-spacing: 0.05em;
-    cursor: pointer;
-    transition: all 0.2s ease;
+    color: #666666;
 }
 
-.btn-secondary-success:hover {
+/* ==========================================================================
+   BARRA DE PROGRESSO
+   ========================================================================== */
+.progress-bar {
+    display: flex;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.step {
+    flex: 1;
+    text-align: center;
+    padding: 0.85rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #999999;
+}
+
+.step.completed {
+    color: #546652;
+}
+
+.step.dark {
     background-color: #111111;
     color: #ffffff;
 }
 
-.pix-timer {
-    font-size: 0.75rem;
-    color: #888888;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.25rem;
+/* ==========================================================================
+   CONTAINER PRINCIPAL (GRID ASSIMÉTRICO)
+   ========================================================================== */
+.main-container {
+    max-width: 1100px;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 3.5rem;
+    align-items: start;
 }
 
-.pix-timer .material-symbols-outlined {
+/* COLUNA DA ESQUERDA */
+.success-section {
+    background: transparent;
+}
+
+.success-header {
+    margin-bottom: 2.5rem;
+}
+
+.check-icon {
+    margin-bottom: 1rem;
+}
+
+.success-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.success-header p {
+    font-size: 0.95rem;
+    color: #555555;
+    line-height: 1.6;
+}
+
+/* Painel de Infos Rápidas */
+.order-info-box {
+    display: flex;
+    border: 1px solid #e5e5e5;
+    background-color: #ffffff;
+    margin-bottom: 2rem;
+}
+
+.info-group {
+    flex: 1;
+    padding: 1.5rem;
+}
+
+.info-group:first-child {
+    border-right: 1px solid #e5e5e5;
+}
+
+.info-group h3 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #777777;
+    margin-bottom: 0.5rem;
+}
+
+.info-group p {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.info-group p.highlight {
+    font-family: monospace;
+    font-size: 1.2rem;
+    color: #111111;
+}
+
+.sub-text {
+    font-size: 0.75rem;
+    color: #888888;
+    display: block;
+    margin-top: 0.25rem;
+}
+
+/* Bloco de Endereço */
+.delivery-address {
+    border: 1px solid #e5e5e5;
+    background-color: #ffffff;
+    padding: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.delivery-address h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 0.5rem;
+}
+
+.delivery-address p {
+    font-size: 0.9rem;
+    color: #444444;
+    line-height: 1.6;
+}
+
+/* Botão Principal */
+.btn-primary {
+    width: 100%;
+    background-color: #111111;
+    color: #ffffff;
+    border: none;
+    padding: 1.15rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #333333;
+}
+
+/* ==========================================================================
+   COLUNA DA DIREITA (RESUMO)
+   ========================================================================== */
+.summary-box {
+    background-color: #ffffff;
+    border: 1px solid #e5e5e5;
+    padding: 1.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.summary-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.5rem;
+    color: #111111;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-size: 0.9rem;
+    color: #444444;
+    margin-bottom: 1.25rem;
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px dashed #e5e5e5;
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+    font-weight: 600;
     font-size: 0.95rem;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+.summary-total span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.total-price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #111111;
+}
+
+.easy-exchange {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: #555555;
+    padding: 0 0.5rem;
+}
+
+.red-text {
+    color: #a33939;
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO INTERNA DA ÁREA DO PIX
+   ========================================================================== */
+.pix-success-box {
+    background-color: #ffffff;
+    border: 1px solid #e5e5e5;
+    padding: 1.75rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.pix-zone-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+}
+
+.pix-zone-text {
+    font-size: 0.85rem;
+    color: #666666;
+    margin-bottom: 1.5rem;
 }

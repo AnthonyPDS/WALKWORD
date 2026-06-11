@@ -73,9 +73,14 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ==========================================================================
        4. LÓGICA DE FINALIZAR O PEDIDO (REDIRECIONANDO PARA TELA DE SUCESSO)
        ========================================================================== */
-    function concluirPedido() {
+    function concluirPedido(metodoEscolhido) {
+        window.location.href = 'pagsucesso.html';
+        localStorage.setItem('metodoPagamento', metodoEscolhido);
         
-        // Redireciona para a nova página de compra efetuada
+        alert('🎉 Processando seu pedido...');
+        
+        // 2. MUDA PARA A TELA DE SUCESSO
+        // Atenção: Verifique se o seu arquivo HTML se chama 'sucesso.html' ou outro nome!
         window.location.href = 'sucesso.html'; 
     }
 
@@ -83,20 +88,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const formCredito = document.getElementById('form-credito');
     if (formCredito) {
         formCredito.addEventListener('submit', (e) => {
-            e.preventDefault(); // Impede o reload da página
-            concluirPedido();
+            e.preventDefault(); 
+            concluirPedido('cartao'); // Salva como 'cartao'
         });
     }
 
-// Gatilho para o botão do PIX
+    // Gatilho para o botão do PIX
     const btnPix = document.getElementById('btn-finalizar-pix');
     if (btnPix) {
-    btnPix.addEventListener('click', () => {
-        // Salva que o usuário escolheu PIX
-        localStorage.setItem('metodoPagamento', 'pix');
-        
-        // Redireciona para a tela de sucesso
-        window.location.href = 'sucesso.html'; 
-    });
-}
-}); 
+        btnPix.addEventListener('click', (e) => {
+            e.preventDefault(); // Impede o botão de recarregar a tela sozinho
+            concluirPedido('pix'); // Salva como 'pix' e redireciona
+        });
+    }
+
+});
