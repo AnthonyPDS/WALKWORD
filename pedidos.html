@@ -3,12 +3,13 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>WalkWord - Meus Favoritos</title>
+    <title>WalkWord - Meus Pedidos</title>
     
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;500;700&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     
-    <link rel="stylesheet" href="css/favoritos.css" />
+    <link rel="stylesheet" href="css/perfil.css">
+    <link rel="stylesheet" href="css/pedidos.css">
 </head>
 <body>
 
@@ -21,8 +22,8 @@
             <a href="#">Sustainability</a>
         </div>
         <div class="nav-icons">
-            <a href="carrinho.html" class="material-symbols-outlined">shopping_bag</a>
-            <a href="index.html" class="material-symbols-outlined">person</a>
+            <button class="material-symbols-outlined" onclick="window.location.href='carrinho.html'">shopping_bag</button>
+            <button class="material-symbols-outlined" onclick="window.location.href='perfil.html'">person</button>
         </div>
     </nav>
 
@@ -30,11 +31,10 @@
         <div class="breadcrumbs">
             <a href="#">Home</a>
             <span class="material-symbols-outlined icon-small">chevron_right</span>
-            <span class="current-page">Meus Favoritos</span>
+            <span class="current-page">Meus Pedidos</span>
         </div>
 
         <section class="account-container">
-            
             <aside class="account-sidebar">
                 <nav class="sidebar-menu">
                     <a href="perfil.html">
@@ -45,11 +45,11 @@
                         <span class="material-symbols-outlined">shopping_bag</span>
                         Meu Carrinho
                     </a>
-                    <a href="pedidos.html">
+                    <a href="pedidos.html" class="active">
                         <span class="material-symbols-outlined">inventory_2</span>
                         Meus Pedidos
                     </a>
-                    <a href="favoritos.html" class="active">
+                    <a href="favoritos.html">
                         <span class="material-symbols-outlined">favorite</span>
                         Meus favoritos
                     </a>
@@ -61,11 +61,13 @@
             </aside>
 
             <div class="account-content">
-                <h2>Meus Favoritos</h2>
-                <p class="section-description">Sua curadoria pessoal. Aqui estão os produtos que você marcou com um coração.</p>
-                
-                <div class="favorites-grid" id="favorites-container">
+                <div class="content-header">
+                    <h2>Meus Pedidos</h2>
+                    <p class="section-description">Acompanhe o status e o histórico das suas curadorias exclusivas.</p>
                 </div>
+                
+                <div id="orders-container" class="orders-list">
+                    </div>
             </div>
         </section>
     </main>
@@ -75,13 +77,8 @@
             <h2>WalkWord</h2>
             <p>© 2026 WalkWord. Crafted for the Conscious Curator.</p>
         </div>
-        <div class="footer-links">
-            <h3>Suporte</h3>
-            <a href="#">Privacidade e Termos</a>
-            <a href="#">Ajuda</a>
-        </div>
     </footer>
-    <script src="js/carrinho.js"></script>
-    <script src="js/favoritos.js"></script>
+
+    <script src="js/pedidos.js"></script>
 </body>
 </html>

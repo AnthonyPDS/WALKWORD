@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // Pegamos o método de pagamento logo no início para que todas as seções possam usar sem erros
+    const metodoPagamento = localStorage.getItem('metodoPagamento');
+
     /* ==========================================================================
        1. GERAR NÚMERO DO PEDIDO E PREVISÃO DE DATA
        ========================================================================== */
@@ -66,11 +69,38 @@ document.addEventListener('DOMContentLoaded', () => {
     if (totalElement) totalElement.innerText = `$${totalGeral.toFixed(2)}`;
 
 
-/* ==========================================================================
+    /* ==========================================================================
+       NOVO: SALVAR O PEDIDO NO HISTÓRICO (LOCALSTORAGE)
+       ========================================================================== */
+    
+    // 1. Pega o histórico de pedidos anterior (se houver) ou cria um novo array vazio
+    let historicoPedidos = JSON.parse(localStorage.getItem('meusPedidos')) || [];
+
+    // 2. Só salva o pedido se ainda houver algo no carrinho (evita duplicar ao atualizar com F5)
+    if (listaCarrinho.length > 0) {
+        const novoPedido = {
+            numeroPedido: orderNumberElement ? orderNumberElement.innerText : `WW-${numeroAleatorio}`,
+            dataCompra: new Date().toLocaleDateString('pt-BR'),
+            previsaoEntrega: deliveryDateElement ? deliveryDateElement.innerText : dataEntrega.toLocaleDateString('pt-BR', opcoesData),
+            status: metodoPagamento === 'pix' ? 'Aguardando Pagamento' : 'Pagamento Aprovado',
+            total: totalGeral,
+            itens: listaCarrinho // Salva todos os produtos comprados
+        };
+
+        // Adiciona o pedido no topo da lista (exibição do mais recente primeiro)
+        historicoPedidos.unshift(novoPedido);
+        
+        // Salva a lista atualizada no LocalStorage
+        localStorage.setItem('meusPedidos', JSON.stringify(historicoPedidos));
+
+        // 3. Esvazia o carrinho, pois o pedido foi registrado com sucesso!
+        localStorage.removeItem('carrinho');
+    }
+
+
+    /* ==========================================================================
        4. VERIFICAR SE O MÉTODO FOI PIX PARA MOSTRAR O COPIA E COLA + QR CODE
        ========================================================================== */
-    const metodoPagamento = localStorage.getItem('metodoPagamento');
-    
     if (metodoPagamento === 'pix') {
         // Altera textos do topo para aguardando pagamento
         document.getElementById('payment-step-text').innerText = '✓ AGUARDANDO PIX';
@@ -106,26 +136,33 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // --- NOVO: LÓGICA DA SIMULAÇÃO DE PAGAMENTO ---
+        // Lógica da simulação de pagamento via PIX App
         const btnSimular = document.getElementById('btn-simular-pgto');
         if (btnSimular) {
             btnSimular.addEventListener('click', () => {
-                // 1. Esconde a caixinha do PIX com efeito suave (ou direto)
-                pixBox.style.display = 'none';
+                // 1. Esconde a caixinha do PIX
+                if (pixBox) pixBox.style.display = 'none';
                 
                 // 2. Altera os textos para o estado de "Sucesso / Aprovado"
                 document.getElementById('payment-step-text').innerText = '✓ PAGAMENTO APROVADO';
                 document.getElementById('success-title').innerText = 'Compra realizada com sucesso!';
                 document.getElementById('success-message').innerText = 'Obrigado por escolher a WalkWord. Seu pedido foi confirmado e já estamos preparando tudo para você.';
                 
-                // 3. Limpa o método do localStorage pois a simulação terminou com sucesso
+                // 3. Atualiza o status do último pedido feito para 'Pagamento Aprovado' no histórico real
+                let pedidosAtualizados = JSON.parse(localStorage.getItem('meusPedidos')) || [];
+                if (pedidosAtualizados.length > 0) {
+                    pedidosAtualizados[0].status = 'Pagamento Aprovado';
+                    localStorage.setItem('meusPedidos', JSON.stringify(pedidosAtualizados));
+                }
+
+                // 4. Limpa o método temporário do localStorage pois a simulação terminou
                 localStorage.removeItem('metodoPagamento');
             });
         }
     }
 });
 
-/* Evita que o carrinho fique preso na memória após a compra terminar */
+/* Evita que dados temporários fiquem soltos ao sair da tela pelo botão principal */
 function limparEVoltar() {
     localStorage.removeItem('carrinho');
     localStorage.removeItem('metodoPagamento');
