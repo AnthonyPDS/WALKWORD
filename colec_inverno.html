@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WalkWord — Catálogo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../CSS/catalogo.css" />
+  </head>
+  <body>
+
+   <header>
+      <a href="../HTML/mainpage.html" class="logo">WalkWord</a>
+
+      <nav>
+        <ul>
+          <li><a href="../HTML/catalogo.html" class="ativo">Catálogo</a></li>
+          <li><a href="../HTML/newin.html">Novidades</a></li>
+          <li><a href="../HTML/storie.html">Histórias</a></li>
+          <li><a href="../HTML/abtus.html">Sobre nós</a></li>
+        </ul>
+      </nav>
+
+      <div class="icones">
+        <a href="../HTML/carrinho.html">
+          <img src="../assets/shopping-cart.png" alt="Carrinho">
+        </a>
+        <a href="../HTML/perfil.html">
+          <img src="../assets/pessoa.png" alt="Perfil">
+        </a>
+      </div>
+    </header>
+
+    <section id="hero">
+      <h1>Nova Coleção de Inverno</h1>
+      <p>
+        Essenciais éticos e peças garimpadas, reunidos para o guarda-roupa
+        de quem veste com intenção.
+      </p>
+    </section>
+
+    <section id="loja">
+
+      <button class="filter-toggle" id="filterToggle">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="3"  x2="14" y2="3"  stroke="#1e1c18" stroke-width="1.2"/>
+          <line x1="0" y1="7"  x2="14" y2="7"  stroke="#1e1c18" stroke-width="1.2"/>
+          <line x1="0" y1="11" x2="14" y2="11" stroke="#1e1c18" stroke-width="1.2"/>
+        </svg>
+        Filtros
+      </button>
+
+      <aside id="filtros">
+        <div class="grupo-filtro">
+          <h3>Estado</h3>
+          <label><input type="checkbox" checked /> Chegou agora</label>
+          <label><input type="checkbox" /> Garimpado</label>
+        </div>
+
+        <div class="grupo-filtro">
+          <h3>Tamanho</h3>
+          <div class="grid-tamanhos">
+            <div class="btn-tamanho">XS</div>
+            <div class="btn-tamanho ativo">S</div>
+            <div class="btn-tamanho">M</div>
+            <div class="btn-tamanho">L</div>
+            <div class="btn-tamanho">XL</div>
+          </div>
+        </div>
+
+        <div class="grupo-filtro">
+          <h3>Cor</h3>
+          <div class="bolinhas-cor">
+            <div class="bolinha ativo" style="background: #4a5e45"></div>
+            <div class="bolinha" style="background: #7a3c30"></div>
+            <div class="bolinha" style="background: #6b5a4e"></div>
+            <div class="bolinha" style="background: #2c2c2a"></div>
+            <div class="bolinha" style="background: #e8e5de; border: 1px solid #ccc"></div>
+          </div>
+        </div>
+
+        <button class="btn-limpar">Limpar Filtros</button>
+      </aside>
+
+      <div class="filter-drawer" id="filterDrawer">
+        <div class="filter-overlay" id="filterOverlay"></div>
+        <div class="filter-panel">
+          <div class="filter-panel-header">
+            <span>Filtros</span>
+            <button class="filter-close" id="filterClose">×</button>
+          </div>
+
+          <div class="grupo-filtro">
+            <h3>Estado</h3>
+            <label><input type="checkbox" checked /> Chegou agora</label>
+            <label><input type="checkbox" /> Garimpado</label>
+          </div>
+
+          <div class="grupo-filtro">
+            <h3>Tamanho</h3>
+            <div class="grid-tamanhos">
+              <div class="btn-tamanho">XS</div>
+              <div class="btn-tamanho ativo">S</div>
+              <div class="btn-tamanho">M</div>
+              <div class="btn-tamanho">L</div>
+              <div class="btn-tamanho">XL</div>
+            </div>
+          </div>
+
+          <div class="grupo-filtro">
+            <h3>Cor</h3>
+            <div class="bolinhas-cor">
+              <div class="bolinha ativo" style="background: #4a5e45"></div>
+              <div class="bolinha" style="background: #7a3c30"></div>
+              <div class="bolinha" style="background: #6b5a4e"></div>
+              <div class="bolinha" style="background: #2c2c2a"></div>
+              <div class="bolinha" style="background: #e8e5de; border: 1px solid #ccc"></div>
+            </div>
+          </div>
+
+          <button class="btn-limpar">Limpar Filtros</button>
+        </div>
+      </div>
+
+      <div id="produtos">
+        <div class="grade-produtos">
+
+          <div class="card-produto">
+    <a href="produto.html?id=0">
+        <div class="imagem-produto">
+            <img src="../imagens/cardiganfrente.png" alt="Cardigan de Lã Cinza">
+            <span class="badge-condicao">Coleção Inverno</span>
+        </div>
+
+        <div class="info-produto">
+            <div class="linha-principal">
+                <span class="nome">Cardigan de Lã Cinza</span>
+                <span class="preco">R$ 179,90</span>
+            </div>
+
+            <span class="material">Inverno 2025</span>
+        </div>
+    </a>
+</div>
+
+
+<div class="card-produto">
+    <a href="produto.html?id=1">
+        <div class="imagem-produto">
+            <img src="../imagens/pufferfrente.PNG" alt="Jaqueta Puffer Marrom">
+            <span class="badge-condicao">Coleção Inverno</span>
+        </div>
+
+        <div class="info-produto">
+            <div class="linha-principal">
+                <span class="nome">Jaqueta Puffer Marrom</span>
+                <span class="preco">R$ 299,90</span>
+            </div>
+
+            <span class="material">Inverno 2025</span>
+        </div>
+    </a>
+</div>
+
+
+<div class="card-produto">
+    <a href="produto.html?id=2">
+        <div class="imagem-produto">
+            <img src="../imagens/calcamarromfrente.PNG" alt="Calça Marrom">
+            <span class="badge-condicao">Coleção Inverno</span>
+        </div>
+
+        <div class="info-produto">
+            <div class="linha-principal">
+                <span class="nome">Calça Marrom</span>
+                <span class="preco">R$ 149,90</span>
+            </div>
+
+            <span class="material">Inverno 2025</span>
+        </div>
+    </a>
+</div>
+
+
+<div class="card-produto">
+    <a href="produto.html?id=3">
+        <div class="imagem-produto">
+            <img src="../imagens/sueterfrente.PNG" alt="Suéter de Lã Bege">
+            <span class="badge-condicao">Coleção Inverno</span>
+        </div>
+
+        <div class="info-produto">
+            <div class="linha-principal">
+                <span class="nome">Suéter de Lã Bege</span>
+                <span class="preco">R$ 159,90</span>
+            </div>
+
+            <span class="material">Inverno 2025</span>
+        </div>
+    </a>
+</div>
+
+
+<div class="card-produto">
+    <a href="produto.html?id=4">
+        <div class="imagem-produto">
+            <img src="../imagens/sobretudofrente.PNG" alt="Sobretudo Bege">
+            <span class="badge-condicao">Coleção Inverno</span>
+        </div>
+
+        <div class="info-produto">
+            <div class="linha-principal">
+                <span class="nome">Sobretudo Bege</span>
+                <span class="preco">R$ 349,90</span>
+            </div>
+
+            <span class="material">Inverno 2025</span>
+        </div>
+    </a>
+</div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="paginacao">
+        <a href="novidades.html">Anterior</a>
+        <a href="novidades.html">01</a>
+        <a href="colec_inverno.html" class="ativo">02</a>
+        <a href="colec_outono.html">03</a>
+        <a href="colec_outono.html">Próxima</a>
+    </section>
+
+    <footer>
+      <div class="marca">
+        <p>WalkWord</p>
+        <small>© 2024 WalkWord.<br />Feito para quem<br />veste com intenção.</small>
+      </div>
+
+      <div class="coluna">
+        <h4>Nossa História</h4>
+        <ul>
+          <li><a href="#">Nosso compromisso</a></li>
+          <li><a href="#">Materiais e origens</a></li>
+          <li><a href="#">A promessa do ciclo</a></li>
+        </ul>
+      </div>
+
+      <div class="coluna">
+        <h4>Suporte</h4>
+        <ul>
+          <li><a href="#">Envio e devoluções</a></li>
+          <li><a href="#">Guia de cuidados</a></li>
+          <li><a href="#">Fale conosco</a></li>
+        </ul>
+      </div>
+
+      <div class="newsletter">
+        <h4>Diário</h4>
+        <p>Receba notas sobre moda intencional e novidades do arquivo.</p>
+        <div class="campo-email">
+          <input type="email" placeholder="Seu e-mail" />
+          <button type="button">Quero receber</button>
+        </div>
+      </div>
+    </footer>
+
+    <script src="cata.js"></script>
+
+  </body>
+</html>

@@ -146,14 +146,16 @@ main {
 .main-image-container, .thumbnail-grid img {
     background-color: var(--surface-container-low);
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .main-image-container img {
     width: 100%;
-    height: auto;
-    object-fit: cover;
-    opacity: 0.9;
-    transition: opacity 0.5s;
+    max-height: 85vh;
+    object-fit: contain;
+    transform: scale(1.)
 }
 
 .main-image-container img:hover { opacity: 1; }

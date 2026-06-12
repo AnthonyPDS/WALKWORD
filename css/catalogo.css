@@ -1,0 +1,630 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Jost", sans-serif;
+  background-color: #f2f0eb;
+  color: #1e1c18;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  height: 58px;
+  background-color: #f2f0eb;
+  border-bottom: 1px solid #e0ddd6;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+header .logo {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 22px;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 36px;
+}
+
+header nav ul li a:hover {
+  transform: scale(1.05);
+}
+
+header nav ul li a {
+  transition: transform 0.3s ease-in-out;
+  font-size: 14px;
+  color: #5c5a54;
+}
+
+header .icones {
+  display: flex;
+  gap: 16px;
+  font-size: 20px;
+}
+
+.icones img {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+nav {
+  display: flex;
+  gap: 50px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #111;
+  font-size: 1rem;
+  position: relative;
+}
+
+nav a::after {
+  content: '';
+  width: 0%;
+  height: 1px;
+  background: #111;
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  transition: 0.3s;
+}
+
+nav a:hover::after,
+nav .active::after {
+  width: 100%;
+}
+
+.icons {
+  display: flex;
+  gap: 20px;
+  font-size: 1.4rem;
+}
+
+section#hero {
+  text-align: center;
+  padding: 70px 20px 50px;
+}
+
+section#hero h1 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 72px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+section#hero p {
+  font-size: 15px;
+  color: #5c5a54;
+  max-width: 480px;
+  margin: 0 auto;
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+section#loja {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 30px 60px;
+  position: relative;
+}
+
+aside#filtros {
+  width: 210px;
+  flex-shrink: 0;
+  padding: 30px 24px 30px 0;
+  border-right: 1px solid #e0ddd6;
+}
+
+aside#filtros .grupo-filtro {
+  margin-bottom: 30px;
+}
+
+aside#filtros .grupo-filtro h3 {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #5c5a54;
+  margin-bottom: 14px;
+}
+
+aside#filtros label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #5c5a54;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.grid-tamanhos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.btn-tamanho {
+  padding: 7px 0;
+  font-family: "Jost", sans-serif;
+  font-size: 12px;
+  border: 1px solid #e0ddd6;
+  background: #fafaf8;
+  color: #5c5a54;
+  cursor: pointer;
+  border-radius: 3px;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.btn-tamanho.ativo {
+  background-color: #d4ddd2;
+  border-color: #4a5e45;
+  color: #4a5e45;
+  font-weight: 500;
+}
+
+.bolinhas-cor {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.bolinha {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.bolinha.ativo {
+  border-color: #1e1c18;
+}
+
+.btn-limpar {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8b4a3a;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: "Jost", sans-serif;
+  margin-top: 8px;
+}
+
+.filter-toggle {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #1e1c18;
+  background: none;
+  border: 1px solid #e0ddd6;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-family: "Jost", sans-serif;
+  margin-bottom: 20px;
+}
+
+.filter-drawer {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+}
+
+.filter-drawer.open {
+  display: block;
+}
+
+.filter-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(30, 28, 24, 0.35);
+}
+
+.filter-panel {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 280px;
+  background: #f2f0eb;
+  padding: 32px 24px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.filter-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.filter-panel-header span {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.filter-close {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #1e1c18;
+  line-height: 1;
+}
+
+#produtos {
+  flex: 1;
+  padding: 30px 0 30px 36px;
+}
+
+.grade-produtos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.card-produto {
+  cursor: pointer;
+}
+
+.imagem-produto {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.imagem-produto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.card-produto:hover .imagem-produto img {
+  transform: scale(1.04);
+}
+
+.badge-condicao {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: rgba(242, 240, 235, 0.88);
+  color: #5c5a54;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.badge-eco {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  font-size: 11px;
+  background: rgba(30, 28, 24, 0.75);
+  color: #c8d6c5;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.info-produto {
+  padding: 12px 0 0;
+}
+
+.info-produto .linha-principal {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 4px;
+}
+
+.info-produto .nome {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 19px;
+  color: #1e1c18;
+}
+
+.info-produto .preco {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 19px;
+  font-style: italic;
+  color: #1e1c18;
+}
+
+.info-produto .material {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #b0ada6;
+}
+
+section#paginacao {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  padding: 30px 0 50px;
+  border-top: 1px solid #e0ddd6;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+section#paginacao a {
+  font-size: 13px;
+  color: #9c9a94;
+  font-weight: 300;
+}
+
+section#paginacao a.ativo {
+  color: #1e1c18;
+  font-weight: 500;
+  border-bottom: 1px solid #1e1c18;
+}
+
+section#paginacao a:hover {
+  color: #000;
+  transition: 0.3s;
+  font-weight: 500;
+}
+
+footer {
+  background-color: #e8e5de;
+  border-top: 1px solid #d5d2cb;
+  padding: 50px 40px 36px;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+  gap: 24px;
+}
+
+footer .marca p {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 20px;
+  margin-bottom: 14px;
+}
+
+footer .marca small {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #5c5a54;
+  line-height: 2;
+  display: block;
+  font-weight: 300;
+}
+
+footer .coluna h4,
+footer .newsletter h4 {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #5c5a54;
+  margin-bottom: 16px;
+}
+
+footer .newsletter h4 {
+  margin-bottom: 8px;
+}
+
+footer .coluna ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+footer .coluna ul li a {
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #5c5a54;
+  font-weight: 300;
+}
+
+footer .newsletter p {
+  font-size: 12px;
+  color: #5c5a54;
+  margin-bottom: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+footer .campo-email {
+  display: flex;
+  border-bottom: 1px solid #b8a090;
+  padding-bottom: 4px;
+}
+
+footer .campo-email input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  font-family: "Jost", sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #1e1c18;
+}
+
+footer .campo-email input::placeholder {
+  color: #9c9a94;
+}
+
+footer .campo-email button {
+  background: none;
+  border: none;
+  font-family: "Jost", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #1e1c18;
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  header {
+    padding: 0 24px;
+  }
+
+  header nav ul {
+    gap: 20px;
+  }
+
+  section#hero h1 {
+    font-size: 54px;
+  }
+
+  section#loja {
+    padding: 0 20px 48px;
+  }
+
+  aside#filtros {
+    width: 180px;
+  }
+
+  .grade-produtos {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  footer {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    padding: 40px 28px 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    padding: 0 20px;
+  }
+
+  header nav {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  section#hero {
+    padding: 48px 20px 36px;
+  }
+
+  section#hero h1 {
+    font-size: 40px;
+  }
+
+  section#hero p {
+    font-size: 14px;
+  }
+
+  section#loja {
+    flex-direction: column;
+    padding: 0 16px 48px;
+  }
+
+  aside#filtros {
+    display: none;
+  }
+
+  .filter-toggle {
+    display: flex;
+  }
+
+  #produtos {
+    padding: 0;
+  }
+
+  .grade-produtos {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .info-produto .nome,
+  .info-produto .preco {
+    font-size: 14px;
+  }
+
+  section#paginacao {
+    gap: 16px;
+    padding: 24px 16px 40px;
+  }
+
+  footer {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 36px 20px 28px;
+  }
+
+  footer .marca {
+    border-bottom: 1px solid #d5d2cb;
+    padding-bottom: 24px;
+  }
+
+  footer .campo-email input {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 420px) {
+  section#hero h1 {
+    font-size: 32px;
+  }
+
+  .grade-produtos {
+    gap: 10px;
+  }
+
+  .badge-eco {
+    font-size: 9px;
+    padding: 3px 8px;
+  }
+
+  section#paginacao {
+    gap: 12px;
+  }
+
+  section#paginacao a {
+    font-size: 12px;
+  }
+}
